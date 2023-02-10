@@ -1,0 +1,97 @@
+
+Files already downloaded and verified
+[2023-02-10 16:01:08,740][main_cifar.py][line:185][INFO] args = Namespace(Nbits=8, act=0, arch='ResNet', batch_size=256, ckpt_dir='', classes=10, data='/home/datasets/imagenet', decay=0.0005, epochs=600, final_temp=200.0, lmbda=0.01, log_file='train.log', lr=0.1, mask_initial_value=0.0, save_file='cifar_resnet20_n8t1a0', t0=1, target=1, ticket=595, wandb_pj_name='retrain', warmup=True, workers=4)
+Files already downloaded and verified
+=> creating model 'ResNet'
+[2023-02-10 16:01:38,334][main_cifar.py][line:225][INFO] start training!
+[2023-02-10 16:01:38,337][main_cifar.py][line:253][INFO] Current global temp:1.009
+==> creating checkpoint directory...
+Model saved at:  ./ckpt/cifar10/resnet20_021023_160138
+Epoch: 1
+[2023-02-10 16:01:41,736][main_cifar.py][line:291][INFO] Epoch:[1]	 lr=0.0200	 Ratio_ones=1.00000	 loss=3.00766	 acc=10.938
+[2023-02-10 16:02:21,538][main_cifar.py][line:291][INFO] Epoch:[1]	 lr=0.0200	 Ratio_ones=0.11875	 loss=2.30680	 acc=10.303
+Saving...
+[2023-02-10 16:02:50,454][main_cifar.py][line:309][INFO] Test's ac is: 9.880%
+Epoch: 2
+[2023-02-10 16:02:50,669][main_cifar.py][line:253][INFO] Current global temp:1.018
+[2023-02-10 16:02:52,233][main_cifar.py][line:291][INFO] Epoch:[2]	 lr=0.0400	 Ratio_ones=0.12500	 loss=2.30252	 acc=14.062
+[2023-02-10 16:03:33,986][main_cifar.py][line:291][INFO] Epoch:[2]	 lr=0.0400	 Ratio_ones=0.15000	 loss=2.30854	 acc=10.949
+Saving...
+[2023-02-10 16:04:18,294][main_cifar.py][line:309][INFO] Test's ac is: 27.650%
+Epoch: 3
+[2023-02-10 16:04:19,400][main_cifar.py][line:253][INFO] Current global temp:1.027
+[2023-02-10 16:04:20,855][main_cifar.py][line:291][INFO] Epoch:[3]	 lr=0.0600	 Ratio_ones=0.20625	 loss=1.81094	 acc=35.156
+[2023-02-10 16:05:06,500][main_cifar.py][line:291][INFO] Epoch:[3]	 lr=0.0600	 Ratio_ones=0.18750	 loss=1.76798	 acc=35.636
+Saving...
+Epoch: 4
+[2023-02-10 16:06:00,486][main_cifar.py][line:309][INFO] Test's ac is: 40.090%
+[2023-02-10 16:06:01,012][main_cifar.py][line:253][INFO] Current global temp:1.036
+[2023-02-10 16:06:02,325][main_cifar.py][line:291][INFO] Epoch:[4]	 lr=0.0800	 Ratio_ones=0.16875	 loss=1.48747	 acc=44.531
+[2023-02-10 16:06:25,992][main_cifar.py][line:291][INFO] Epoch:[4]	 lr=0.0800	 Ratio_ones=0.17500	 loss=1.47695	 acc=46.941
+Epoch: 5
+[2023-02-10 16:06:44,872][main_cifar.py][line:309][INFO] Test's ac is: 39.680%
+[2023-02-10 16:06:45,127][main_cifar.py][line:253][INFO] Current global temp:1.046
+[2023-02-10 16:06:45,692][main_cifar.py][line:291][INFO] Epoch:[5]	 lr=0.1000	 Ratio_ones=0.16250	 loss=1.26295	 acc=60.156
+[2023-02-10 16:07:10,536][main_cifar.py][line:291][INFO] Epoch:[5]	 lr=0.1000	 Ratio_ones=0.17500	 loss=1.28581	 acc=55.005
+Saving...
+Epoch: 6
+[2023-02-10 16:07:39,986][main_cifar.py][line:309][INFO] Test's ac is: 53.460%
+[2023-02-10 16:07:40,301][main_cifar.py][line:253][INFO] Current global temp:1.055
+[2023-02-10 16:07:40,970][main_cifar.py][line:291][INFO] Epoch:[6]	 lr=0.1000	 Ratio_ones=0.17500	 loss=1.18169	 acc=59.766
+[2023-02-10 16:08:07,658][main_cifar.py][line:291][INFO] Epoch:[6]	 lr=0.1000	 Ratio_ones=0.17500	 loss=1.12457	 acc=61.320
+Saving...
+Epoch: 7
+[2023-02-10 16:08:53,705][main_cifar.py][line:309][INFO] Test's ac is: 58.840%
+[2023-02-10 16:08:54,348][main_cifar.py][line:253][INFO] Current global temp:1.064
+[2023-02-10 16:08:56,617][main_cifar.py][line:291][INFO] Epoch:[7]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.98151	 acc=64.062
+[2023-02-10 16:09:31,156][main_cifar.py][line:291][INFO] Epoch:[7]	 lr=0.1000	 Ratio_ones=0.16250	 loss=0.98002	 acc=66.333
+Saving...
+Epoch: 8
+[2023-02-10 16:10:18,710][main_cifar.py][line:309][INFO] Test's ac is: 60.360%
+[2023-02-10 16:10:19,403][main_cifar.py][line:253][INFO] Current global temp:1.074
+[2023-02-10 16:10:20,955][main_cifar.py][line:291][INFO] Epoch:[8]	 lr=0.1000	 Ratio_ones=0.16250	 loss=0.97597	 acc=67.188
+[2023-02-10 16:10:55,984][main_cifar.py][line:291][INFO] Epoch:[8]	 lr=0.1000	 Ratio_ones=0.16875	 loss=0.89407	 acc=69.806
+Saving...
+Epoch: 9
+[2023-02-10 16:11:40,494][main_cifar.py][line:309][INFO] Test's ac is: 64.750%
+[2023-02-10 16:11:41,058][main_cifar.py][line:253][INFO] Current global temp:1.083
+[2023-02-10 16:11:42,707][main_cifar.py][line:291][INFO] Epoch:[9]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.86879	 acc=71.875
+[2023-02-10 16:12:22,862][main_cifar.py][line:291][INFO] Epoch:[9]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.83082	 acc=72.092
+Epoch: 10
+[2023-02-10 16:13:10,986][main_cifar.py][line:309][INFO] Test's ac is: 63.960%
+[2023-02-10 16:13:11,443][main_cifar.py][line:253][INFO] Current global temp:1.093
+[2023-02-10 16:13:13,335][main_cifar.py][line:291][INFO] Epoch:[10]	 lr=0.1000	 Ratio_ones=0.18125	 loss=0.82797	 acc=75.391
+[2023-02-10 16:13:57,187][main_cifar.py][line:291][INFO] Epoch:[10]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.76351	 acc=74.722
+[2023-02-10 16:14:48,828][main_cifar.py][line:309][INFO] Test's ac is: 62.040%
+[2023-02-10 16:14:49,334][main_cifar.py][line:253][INFO] Current global temp:1.103
+Epoch: 11
+[2023-02-10 16:14:51,316][main_cifar.py][line:291][INFO] Epoch:[11]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.68626	 acc=76.562
+[2023-02-10 16:15:23,324][main_cifar.py][line:291][INFO] Epoch:[11]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.71966	 acc=76.535
+Saving...
+Epoch: 12
+[2023-02-10 16:15:48,394][main_cifar.py][line:309][INFO] Test's ac is: 67.780%
+[2023-02-10 16:15:48,811][main_cifar.py][line:253][INFO] Current global temp:1.113
+[2023-02-10 16:15:49,526][main_cifar.py][line:291][INFO] Epoch:[12]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.68519	 acc=76.172
+[2023-02-10 16:16:08,136][main_cifar.py][line:291][INFO] Epoch:[12]	 lr=0.1000	 Ratio_ones=0.17500	 loss=0.68117	 acc=77.908
+Saving...
+[2023-02-10 16:16:41,392][main_cifar.py][line:309][INFO] Test's ac is: 68.660%
+Epoch: 13
+[2023-02-10 16:16:41,830][main_cifar.py][line:253][INFO] Current global temp:1.123
+[2023-02-10 16:16:42,857][main_cifar.py][line:291][INFO] Epoch:[13]	 lr=0.1000	 Ratio_ones=0.16875	 loss=0.65208	 acc=75.781
+[2023-02-10 16:17:12,037][main_cifar.py][line:291][INFO] Epoch:[13]	 lr=0.1000	 Ratio_ones=0.16875	 loss=0.64080	 acc=78.941
+Saving...
+Epoch: 14
+[2023-02-10 16:17:41,693][main_cifar.py][line:309][INFO] Test's ac is: 72.470%
+[2023-02-10 16:17:42,102][main_cifar.py][line:253][INFO] Current global temp:1.133
+[2023-02-10 16:17:42,870][main_cifar.py][line:291][INFO] Epoch:[14]	 lr=0.0999	 Ratio_ones=0.16875	 loss=0.68329	 acc=78.906
+[2023-02-10 16:18:07,580][main_cifar.py][line:291][INFO] Epoch:[14]	 lr=0.0999	 Ratio_ones=0.16250	 loss=0.62319	 acc=79.626
+[2023-02-10 16:18:46,068][main_cifar.py][line:309][INFO] Test's ac is: 76.330%
+Saving...
+Epoch: 15
+[2023-02-10 16:18:47,156][main_cifar.py][line:253][INFO] Current global temp:1.143
+[2023-02-10 16:18:48,471][main_cifar.py][line:291][INFO] Epoch:[15]	 lr=0.0999	 Ratio_ones=0.16875	 loss=0.57821	 acc=78.516
+[2023-02-10 16:19:29,731][main_cifar.py][line:291][INFO] Epoch:[15]	 lr=0.0999	 Ratio_ones=0.16875	 loss=0.59905	 acc=80.523
+Epoch: 16
+[2023-02-10 16:19:58,759][main_cifar.py][line:309][INFO] Test's ac is: 76.290%
+[2023-02-10 16:19:59,095][main_cifar.py][line:253][INFO] Current global temp:1.153
+[2023-02-10 16:20:00,467][main_cifar.py][line:291][INFO] Epoch:[16]	 lr=0.0999	 Ratio_ones=0.16250	 loss=0.60647	 acc=82.031

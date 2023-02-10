@@ -17,9 +17,9 @@ from cifar10.network.resnetcs20 import ResNet
 from cifar10.network.vgg import VGG19bn
 from imagenet.networks.resnetcs18 import ResNet18
 from imagenet.networks.resnetcs50 import ResNet50
-from torch.utils.tensorboard import SummaryWriter
+# from torch.utils.tensorboard import SummaryWriter
 import logging
-import matplotlib.pyplot as plt
+import wandb, time, sys, shutil
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 parser = argparse.ArgumentParser(description='Training a ResNet on CIFAR-10 with Continuous Sparsification')
@@ -43,6 +43,9 @@ parser.add_argument('-a','--arch', default='ResNet', help= 'ResNet for resnet20 
 parser.add_argument('--warmup',dest='warmup',action='store_true',help='warmup learning rate for the first 5 epochs')
 parser.add_argument('--t0', type=int, default=1, help='number of rewindinngs for learning rate, (T-0 for CosineAnnealingWarmRestarts)')
 parser.add_argument('--mask-initial-value', type=float, default=0., help='initial value for mask parameters')
+parser.add_argument('--wandb_pj_name', default='retrain', type=str)
+parser.add_argument('--ckpt_dir', type=str, default='', 
+                        help='checkpoint save/load directory, default=ckpt/<modelName><time>/')
 
 args = parser.parse_args()
 
@@ -149,7 +152,19 @@ def imagenet_loader(args):
                                              )
     return train_loader, val_loader
 
+def save_checkpoint(state, is_best, checkpoint='checkpoint', filename='checkpoint.pth.tar'):
+    filepath = os.path.join(checkpoint, filename)
+    torch.save(state, filepath)
+    if is_best:
+        shutil.copyfile(filepath, os.path.join(checkpoint, 'model_best.pth.tar'))
+
 if __name__ == '__main__':
+    for arg in vars(args):
+        print(format(arg, '<20'), format(str(getattr(args, arg)), '<'))
+        
+    if args.ckpt_dir != 'debug':
+        wandb.init(project='csq_cifar10_resnet20', name=args.wandb_pj_name, config=args, entity="tinycute")
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # if args.seed is not None:
     random.seed(3407)
@@ -163,7 +178,7 @@ if __name__ == '__main__':
     if not os.path.exists(save_dir):
             os.makedirs(save_dir)
 
-    writer = SummaryWriter(save_dir)
+    # writer = SummaryWriter(save_dir)
 
     train_log_filepath = os.path.join(save_dir, args.log_file)
     logger = get_logger(train_log_filepath)
@@ -190,6 +205,16 @@ if __name__ == '__main__':
         mask_initial_value = args.mask_initial_value
         ).to(device)
 
+    print("==> creating checkpoint directory...")
+    checkpoint_path = args.ckpt_dir
+    if checkpoint_path == '':
+        checkpoint_path = os.path.join(os.path.curdir, 'ckpt/cifar10/resnet20' + '_'
+                                        + time.strftime('%m%d%y_%H%M%S', time.localtime()))
+    elif checkpoint_path == 'debug':
+        checkpoint_path = os.path.join(os.path.curdir, 'ckpt/cifar10/debug/')
+    if not os.path.exists(checkpoint_path):
+            os.mkdir(checkpoint_path)
+    print('Model saved at: ', checkpoint_path)
 
     #define loss funtion & optimizer
     criterion = nn.CrossEntropyLoss()
@@ -198,8 +223,8 @@ if __name__ == '__main__':
     scheduler = torch.optim.lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=int(args.epochs/args.t0), T_mult=1, eta_min=0, last_epoch=- 1, verbose=False)
     
     logger.info('start training!')
-    # best_acc = 0
-    solid_best_acc = 0
+    best_acc = 0.
+    # solid_best_acc = 0
     temp_increase = args.final_temp**(1./(args.ticket))
     for epoch in range(1, args.epochs):
         print('\nEpoch: %d' % epoch)
@@ -264,8 +289,8 @@ if __name__ == '__main__':
             train_acc = 100. * correct / total
             if i % 100 == 0:
                 logger.info('Epoch:[{}]\t lr={:.4f}\t Ratio_ones={:.5f}\t loss={:.5f}\t acc={:.3f}'.format(epoch,lrr,ratio_one,sum_loss/(i+1),train_acc ))
-            writer.add_scalar('train loss', sum_loss / (i + 1), epoch)
-            writer.add_scalar('Ratio_of_Ones_in_mask', ratio_one, epoch)
+            # writer.add_scalar('train loss', sum_loss / (i + 1), epoch)
+            # writer.add_scalar('Ratio_of_Ones_in_mask', ratio_one, epoch)
 
         # test with soft mask
         with torch.no_grad():
@@ -280,11 +305,25 @@ if __name__ == '__main__':
                 total += labels.size(0)
                 correct += (predicted == labels).sum()
                 test_acc = (100 * correct / total)
+                test_loss = criterion(outputs, labels)
             logger.info('Test\'s ac is: %.3f%%' % test_acc )
-            writer.add_scalar('Test Acc', test_acc, epoch)
+            # writer.add_scalar('Test Acc', test_acc, epoch)
+
+        if args.ckpt_dir != 'debug':
+            wandb.log({'Train_loss': classify_loss, 'Total_train_loss': loss, 'Train_acc': train_acc, 'Test_loss': test_loss, 'Test_acc': test_acc})
+
         if model.ticket == True:
             for m in model.mask_modules:
                 logger.info(m.mask)
+        
+        # save model
+        is_best = test_acc > best_acc
+        best_acc = max(test_acc, best_acc)
+        if is_best:
+            print('Saving...')
+        save_checkpoint({
+            'state_dict': model.state_dict()
+        }, is_best, checkpoint=checkpoint_path)
         
     TP = model.total_param()
     avg_bit = args.Nbits * ratio_one
@@ -292,3 +331,4 @@ if __name__ == '__main__':
     logger.info('average bit is: %.3f ' % avg_bit)
     # plt.plot(np.arange(len(lr)), lr)
     # plt.savefig('learning rate.jpg')
+

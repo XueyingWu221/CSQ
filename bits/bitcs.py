@@ -225,10 +225,10 @@ class BitLinear(Module):
         if self.bin:
             dev = self.pweight.device
             self.mask = self.compute_mask(temp, ticket)
-            # pweight = self.compute_weight(self.pweight, temp, ticket)
-            # nweight = self.compute_weight(self.nweight, temp, ticket)
-            pweight = torch.sigmoid(temp*self.pweight)
-            nweight = torch.sigmoid(temp*self.nweight)
+            pweight = self.compute_weight(self.pweight, temp, ticket)
+            nweight = self.compute_weight(self.nweight, temp, ticket)
+            # pweight = torch.sigmoid(temp*self.pweight)
+            # nweight = torch.sigmoid(temp*self.nweight)
             weight = torch.mul(pweight-nweight, self.exps)
             masked_weight = weight * self.mask
             weight =  torch.sum(masked_weight,dim=2) * self.scale
@@ -463,10 +463,10 @@ class BitConv2d(Bit_ConvNd):
         if self.bin:
             dev = self.pweight.device
             self.mask = self.compute_mask(temp, ticket)
-            # pweight = self.compute_weight(self.pweight, temp, ticket)
-            # nweight = self.compute_weight(self.nweight, temp, ticket)
-            pweight = torch.sigmoid(temp*self.pweight)
-            nweight = torch.sigmoid(temp*self.nweight)
+            pweight = self.compute_weight(self.pweight, temp, ticket)
+            nweight = self.compute_weight(self.nweight, temp, ticket)
+            # pweight = torch.sigmoid(temp*self.pweight)
+            # nweight = torch.sigmoid(temp*self.nweight)
             weight = torch.mul(pweight-nweight, self.exps)
             masked_weight = weight * self.mask
             weight =  torch.sum(masked_weight,dim=4) * self.scale

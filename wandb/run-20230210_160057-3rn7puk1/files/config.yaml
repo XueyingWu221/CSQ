@@ -1,0 +1,85 @@
+wandb_version: 1
+
+Nbits:
+  desc: null
+  value: 8
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.11
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.8.5
+    start_time: 1676062858
+    t:
+      1:
+      - 1
+      - 41
+      3:
+      - 13
+      - 16
+      4: 3.8.5
+      5: 0.12.11
+      8:
+      - 5
+act:
+  desc: null
+  value: 0
+arch:
+  desc: null
+  value: ResNet
+batch_size:
+  desc: null
+  value: 256
+ckpt_dir:
+  desc: null
+  value: ''
+classes:
+  desc: null
+  value: 10
+data:
+  desc: null
+  value: /home/datasets/imagenet
+decay:
+  desc: null
+  value: 0.0005
+epochs:
+  desc: null
+  value: 600
+final_temp:
+  desc: null
+  value: 200.0
+lmbda:
+  desc: null
+  value: 0.01
+log_file:
+  desc: null
+  value: train.log
+lr:
+  desc: null
+  value: 0.1
+mask_initial_value:
+  desc: null
+  value: 0.0
+save_file:
+  desc: null
+  value: cifar_resnet20_n8t1a0
+t0:
+  desc: null
+  value: 1
+target:
+  desc: null
+  value: 1
+ticket:
+  desc: null
+  value: 595
+wandb_pj_name:
+  desc: null
+  value: retrain
+warmup:
+  desc: null
+  value: true
+workers:
+  desc: null
+  value: 4

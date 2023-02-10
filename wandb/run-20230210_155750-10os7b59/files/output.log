@@ -1,0 +1,28 @@
+[2023-02-10 15:57:59,076][main_cifar.py][line:182][INFO] args = Namespace(Nbits=8, act=0, arch='ResNet', batch_size=256, ckpt_dir='', classes=10, data='/home/datasets/imagenet', decay=0.0005, epochs=600, final_temp=200.0, lmbda=0.01, log_file='train.log', lr=0.1, mask_initial_value=0.0, save_file='cifar_resnet20_n8t1a0', t0=1, target=1, ticket=595, wandb_pj_name='retrain', warmup=True, workers=4)
+ 34%|███████████████████████████████████████████████████████████████████████████▏                                                                                                                                                | 58299392/170498071 [00:01<00:01, 67482142.29it/s]
+
+ 94%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▉              | 159590400/170498071 [00:03<00:00, 44061591.16it/s]
+
+170499072it [00:03, 49969411.46it/s]
+Files already downloaded and verified
+=> creating model 'ResNet'
+==> creating checkpoint directory...
+Epoch: 1
+[2023-02-10 15:58:14,921][main_cifar.py][line:219][INFO] start training!
+[2023-02-10 15:58:14,922][main_cifar.py][line:247][INFO] Current global temp:1.009
+[2023-02-10 15:58:20,510][main_cifar.py][line:285][INFO] Epoch:[1]	 lr=0.0200	 Ratio_ones=1.00000	 loss=3.00766	 acc=10.938
+[2023-02-10 15:58:51,987][main_cifar.py][line:285][INFO] Epoch:[1]	 lr=0.0200	 Ratio_ones=0.11875	 loss=2.30680	 acc=10.303
+Saving...
+[2023-02-10 15:59:36,543][main_cifar.py][line:303][INFO] Test's ac is: 9.880%
+Traceback (most recent call last):
+  File "main_cifar.py", line 318, in <module>
+    save_checkpoint({
+  File "main_cifar.py", line 157, in save_checkpoint
+    torch.save(state, filepath)
+  File "/home/xw221/anaconda3/lib/python3.8/site-packages/torch/serialization.py", line 376, in save
+    with _open_file_like(f, 'wb') as opened_file:
+  File "/home/xw221/anaconda3/lib/python3.8/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/xw221/anaconda3/lib/python3.8/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: './ckpt/cifar10/resnet20_021023_155814/checkpoint.pth.tar'
